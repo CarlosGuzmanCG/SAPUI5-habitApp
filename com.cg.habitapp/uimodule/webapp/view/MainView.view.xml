@@ -1,9 +1,38 @@
-<mvc:View controllerName="com.cg.habitapp.controller.MainView"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+<mvc:View
+    controllerName="com.cg.habitapp.controller.MainView"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
         <content>
-            <Text text="Hola"></Text>
+            <Table items="{pendientes>/}" mode="Delete" delete=".onDeleteTask">
+                <headerToolbar>
+                    <OverflowToolbar >
+                        <Button text="Agregar" icon="sap-icon://add-activity" type="Emphasized" press=".onAddTask"/>
+                    </OverflowToolbar >
+                </headerToolbar>
+                <columns>
+                    <Column hAlign="Center">
+                        <Title text="Pendientes" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <VBox>
+                                <Input value="{pendientes>Text}" />
+                                <Text text="{pendientes>Text}" />
+                                
+                            </VBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
         </content>
     </Page>
 </mvc:View>
