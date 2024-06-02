@@ -10,17 +10,20 @@ sap.ui.define(
         "use strict";
 
         return Controller.extend("com.cg.habitapp.controller.MainView", {
+
+            baseRecord:  { //diccionario
+                priority: 0,
+                title: '',
+                description : '',
+                date_created: '',
+                date_start: '',
+                due_date: ''
+            },
+
             onInit: function () {
                 //var oModel = new sap.ui.model.json.JSONModel();
                 var oModel = new JSONModel(); 
-                oModel.setData(//{ 
-                    //actividades:
-                    [
-                        { Text : 'Prueba desde modelo' }
-                    ]
-                //}
-                );
-                //this.getView().setModel(oModel,'Pendientes');
+                oModel.setData([]);
                 this.setModel(oModel,'pendientes'); //Carga a la vista
                 //debbuger;
             },
@@ -29,7 +32,9 @@ sap.ui.define(
                 var oModel = this.getModel('pendientes');
                 var oDatos = oModel.getData(); // obtenemos los datos actualizados
 
-                oDatos.push({Text : 'Prueba desde modelo'});
+                var recordToAdd = this.baseRecord;
+                recordToAdd.date_created = new Date(); //agregamos una fecha al controlador
+                oDatos.push(this.baseRecord);
 
                 oModel.setData(oDatos);
 
@@ -37,7 +42,7 @@ sap.ui.define(
 
             onDeleteTask: function(oEvent){
                 var oModel = oEvent.getParameter('listItem').getBindingContext('pendientes').getModel();
-                debugger
+                //debugger
                 var sPath = oEvent.getParameter('listItem').getBindingContext('pendientes').getPath();
 
                 var posicionAEliminar = sPath.split('/')[1];

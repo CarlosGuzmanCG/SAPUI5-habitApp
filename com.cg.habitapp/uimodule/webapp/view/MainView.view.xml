@@ -4,35 +4,83 @@
     displayBlock="true"
     xmlns="sap.m"
 >
-    <Page
-        id="page"
-        title="{i18n>title}"
-    >
-        <content>
-            <Table items="{pendientes>/}" mode="Delete" delete=".onDeleteTask">
-                <headerToolbar>
-                    <OverflowToolbar >
-                        <Button text="Agregar" icon="sap-icon://add-activity" type="Emphasized" press=".onAddTask"/>
-                    </OverflowToolbar >
-                </headerToolbar>
-                <columns>
-                    <Column hAlign="Center">
-                        <Title text="Pendientes" />
-                    </Column>
-                </columns>
+    <Shell>
+        <Page
+            id="page"
+            title="{i18n>title}"
+        >
+            <content>
+                <Table
+                    items="{pendientes>/}"
+                    mode="Delete"
+                    delete=".onDeleteTask"
+                >
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Button
+                                text="Agregar"
+                                icon="sap-icon://add-activity"
+                                type="Emphasized"
+                                press=".onAddTask"
+                            />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column hAlign="Center">
+                            <Title text="Pendientes" />
+                        </Column>
+                    </columns>
 
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <VBox>
-                                <Input value="{pendientes>Text}" />
-                                <Text text="{pendientes>Text}" />
-                                
-                            </VBox>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
-        </content>
-    </Page>
+                    <items>
+                        <ColumnListItem>
+                            <cells >
+                                    <HBox alignContent="SpaceAround">
+                                        <VBox alignItems="Start">
+                                        <layoutData>
+                                            <FlexItemData growFactor="3"/>
+                                        </layoutData>
+                                            <VBox>
+                                                <Text text="Titulo" />
+                                                <Input
+                                                    value="{pendientes>Text}"
+                                                />
+                                            </VBox>
+                                            <VBox>
+                                                <Text text="Descripción" />
+                                                <TextArea
+                                                    value="{pendientes>description}"
+                                                    rows="3"
+                                                    cols="40"
+                                                />
+                                            </VBox>
+                                        </VBox>
+                                        <VBox>
+
+                                            <layoutData>
+                                                <FlexItemData growFactor="1"/>
+                                            </layoutData>
+
+                                            <Text text="Creado el" />
+                                            <!--DatePicker id="date_created" editable="false" value="{pendientes>date_created}"/-->
+                                            <DatePicker 
+                                                id="created_on" 
+                                                editable="false"
+                                                value="{
+                                                    path: 'pendientes>date_created',
+                                                    type: 'sap.ui.model.type.Date',
+                                                    formatOptions: {
+                                                        style: 'medium',
+                                                        format: 'YMd',
+                                                        strictParsing: true
+                                                    }
+                                                }"/>
+                                        </VBox>
+                                    </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </content>
+        </Page>
+    </Shell>
 </mvc:View>
