@@ -10,8 +10,18 @@
             title="{i18n>title}"
         >
             <content>
+                <!-- path= Propiedad 
+
+            -->
                 <Table
-                    items="{pendientes>/}"
+                    items="{
+                        path: 'pendientes>/',
+                        sorter: {
+                            path: 'priority',
+                            descending: false
+                            }
+
+                    }"
                     mode="Delete"
                     delete=".onDeleteTask"
                 >
@@ -33,16 +43,18 @@
 
                     <items>
                         <ColumnListItem>
-                            <cells >
-                                    <HBox alignContent="SpaceAround">
+                            <cells>
+                                <VBox>
+                                    <HBox alignContent="SpaceAround"
+                                        visible="{pendientes>editable}">
                                         <VBox alignItems="Start">
-                                        <layoutData>
-                                            <FlexItemData growFactor="3"/>
-                                        </layoutData>
+                                            <layoutData>
+                                                <FlexItemData growFactor="3" />
+                                            </layoutData>
                                             <VBox>
                                                 <Text text="Titulo" />
                                                 <Input
-                                                    value="{pendientes>Text}"
+                                                    value="{pendientes>title}"
                                                 />
                                             </VBox>
                                             <VBox>
@@ -55,27 +67,69 @@
                                             </VBox>
                                         </VBox>
                                         <VBox>
-
                                             <layoutData>
-                                                <FlexItemData growFactor="1"/>
+                                                <FlexItemData growFactor="1" />
                                             </layoutData>
 
                                             <Text text="Creado el" />
                                             <!--DatePicker id="date_created" editable="false" value="{pendientes>date_created}"/-->
-                                            <DatePicker 
-                                                id="created_on" 
+                                            <DatePicker
                                                 editable="false"
+                                                value="{pendientes>date_created}"
+                                            />
+
+                                            <Text
+                                                text="Fecha inicio planeada"
+                                            />
+                                            <DatePicker
+                                                editable="true"
                                                 value="{
-                                                    path: 'pendientes>date_created',
-                                                    type: 'sap.ui.model.type.Date',
-                                                    formatOptions: {
-                                                        style: 'medium',
-                                                        format: 'YMd',
-                                                        strictParsing: true
-                                                    }
-                                                }"/>
+                                                    path: 'pendientes>date_start'
+                                                    
+                                                }"
+                                            />
+
+                                            <Text text="Fecha fin" />
+                                            <DatePicker
+                                                editable="true"
+                                                value="{
+                                                    path: 'pendientes>due_date'
+                                                    
+                                                }"
+                                            />
                                         </VBox>
                                     </HBox>
+
+                                    <ObjectHeader
+                                        title="{pendientes>title}"
+                                        number="{pendientes>priority}"
+                                        visible="{!pendientes>editable}"
+                                        titlePress=".onEdit">
+                                        <statuses>
+                                            <ObjectStatus
+                                                text="In Stock"
+                                                state="Success"
+                                            />
+                                        </statuses>
+                                        <ObjectAttribute
+                                            title="Descripcion"
+                                            text="{pendientes>description}"
+                                        />
+                                        <ObjectAttribute
+                                            title="Fecha Creación"
+                                            text="{pendientes>date_created}"
+                                        />
+                                        <ObjectAttribute
+                                            title="Fecha Inicio"
+                                            text="{pendientes>date_start}"
+                                        />
+                                        <ObjectAttribute
+                                            title="Fecha Fin"
+                                            text="{pendientes>due_date}"
+                                        />
+                                        
+                                    </ObjectHeader>
+                                </VBox>
                             </cells>
                         </ColumnListItem>
                     </items>
