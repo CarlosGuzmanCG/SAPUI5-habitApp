@@ -42,8 +42,9 @@
                     </columns>
 
                     <items>
-                        <ColumnListItem>
+                        <ColumnListItem detailPress="onPressItem">
                             <cells>
+                                
                                 <VBox>
                                     <HBox alignContent="SpaceAround"
                                         visible="{pendientes>editable}">
@@ -130,10 +131,45 @@
                                         
                                     </ObjectHeader>
                                 </VBox>
+
+
                             </cells>
                         </ColumnListItem>
                     </items>
                 </Table>
+
+                <List
+                    items="{
+                        path: 'pendientes>/',
+                        sorter: {
+                            path: 'priority',
+                            descending: false
+                            }
+
+                    }"
+                >
+                    <CustomListItem >
+                    
+                        <content>
+
+                        </content>
+                    </CustomListItem>
+
+                    <ObjectListItem title="{pendientes>title}"
+                                        number="{pendientes>priority}"
+                                        visible="{!pendientes>editable}"
+                                        press=".onPressItem">
+
+                        <firstStatus>
+                            <ObjectStatus text="In Stock" state="Success"/>
+                        </firstStatus>
+
+                        
+                    
+                    </ObjectListItem>
+
+                </List>
+
             </content>
         </Page>
     </Shell>

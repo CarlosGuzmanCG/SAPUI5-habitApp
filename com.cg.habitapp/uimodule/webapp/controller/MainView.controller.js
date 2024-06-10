@@ -82,6 +82,7 @@ sap.ui.define(
                 var posicionAEliminar = sPath.split('/')[1];
                 var oData = oModel.getData();
                 var oNewData = [];
+
                 for(var x = 0; x < oData.length; x++){
                     if(x ==  posicionAEliminar) continue;
                     oNewData.push(oData[x]);
@@ -91,6 +92,10 @@ sap.ui.define(
             },
 
             onEdit: function(oEvent){
+                debugger
+            },
+
+            onPressItem: function(oEvent){
                 debugger
             }
         });
