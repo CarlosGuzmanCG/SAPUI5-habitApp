@@ -92,8 +92,9 @@
                                                 editable="true"
                                                 value="{
                                                     path: 'pendientes>date_start'
-                                                    
                                                 }"
+                                                change=".onDataChange"
+                                                valueFormat="yyyy-MM-dd"
                                             />
 
                                             <Text text="Fecha fin" />
@@ -103,6 +104,8 @@
                                                     path: 'pendientes>due_date'
                                                     
                                                 }"
+                                                change=".onDataChange"
+                                                valueFormat="yyyy-MM-dd"
                                             />
                                         </VBox>
 
@@ -113,6 +116,7 @@
                                             <Button
                                                 text="Guardar"
                                                 press=".onPressSaveTask"
+                                                enabled="{= ! ${pendientes>error} }"
                                             />
                                         </VBox>
                                     </HBox>
