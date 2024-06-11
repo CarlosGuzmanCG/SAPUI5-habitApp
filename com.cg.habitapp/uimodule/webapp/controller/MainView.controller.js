@@ -146,6 +146,36 @@ sap.ui.define(
                 var sPath = oPressedListItemContext.getPath();
 
                 oModel.setProperty( sPath + '/status', 'completed' );
+            },
+
+            onDataChange: function(oEvent){
+                var oBindinContext = oEvent.getSource().getBindingContext('pendientes');//.getObjetc();//acceso a datos
+                var oData = oBindinContext.getObject();//dev un diccionario js
+                //var date = oData.date_created;
+                //console.log(date);
+                var sPath = oBindinContext.getPath();
+                var oModel = oBindinContext.getModel();
+
+                if(!oData.date_start) return;
+
+                if(!oData.due_date) return;
+
+                var fecha_inicio = new Date(oData.date_start);
+                var fecha_fin = new Date(oData.due_date);
+
+                if(fecha_inicio > fecha_fin){
+                    /*oData.date_start = '';
+                    oData.due_date = '';
+                    oBindinContext.getModel().setProperty(oBindinContext.getPath(), oData);*/
+                    oEvent.getSource().setValueState('Error');
+                    oEvent.getSource().setValueStateText('Fecha fin no puede ser menor a la fecha inicio');
+                    oModel.setProperty( sPath + '/error', true );
+                    debugger
+                }else{
+                    oEvent.getSource().setValueState('Success');
+                    oEvent.getSource().setValueStateText('');
+                    oModel.setProperty( sPath + '/error', false );
+                }
             }
         });
     });
