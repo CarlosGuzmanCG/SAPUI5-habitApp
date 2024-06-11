@@ -22,7 +22,9 @@
                             }
 
                     }"
-                    itemPress=".onPressListItem"
+                    delete=".onDeleteTask"
+                    mode="Delete"
+                    itemPress=".onListItemPress"
                 >
                     <headerToolbar>
                         <OverflowToolbar>
@@ -41,14 +43,17 @@
                     </columns>
 
                     <items>
-                        <ColumnListItem 
+                        <ColumnListItem
                             press="onPressItem"
-                            type="Active">
+                            type="Active"
+                        >
                             <cells>
-                                
                                 <VBox>
-                                    <HBox alignContent="SpaceAround"
-                                        visible="{pendientes>editable}">
+                                    <HBox
+                                        alignContent="SpaceAround"
+                                        visible="{pendientes>editable}"
+                                    >
+                                        <!--visible="{= ! ${pendientes>editable} }"> False -->
                                         <VBox alignItems="Start">
                                             <layoutData>
                                                 <FlexItemData growFactor="3" />
@@ -100,46 +105,75 @@
                                                 }"
                                             />
                                         </VBox>
+
+                                        <VBox justifyContent="Center">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                            <Button
+                                                text="Guardar"
+                                                press=".onPressSaveTask"
+                                            />
+                                        </VBox>
                                     </HBox>
 
-                                    <ObjectHeader
-                                        title="{pendientes>title}"
-                                        number="{pendientes>priority}"
-                                        visible="{!pendientes>editable}"
-                                        titlePress=".onEdit">
-                                        <statuses>
-                                            <ObjectStatus
-                                                text="In Stock"
-                                                state="Success"
-                                            />
-                                        </statuses>
-                                        <ObjectAttribute
-                                            title="Descripcion"
-                                            text="{pendientes>description}"
-                                        />
-                                        <ObjectAttribute
-                                            title="Fecha Creación"
-                                            text="{pendientes>date_created}"
-                                        />
-                                        <ObjectAttribute
-                                            title="Fecha Inicio"
-                                            text="{pendientes>date_start}"
-                                        />
-                                        <ObjectAttribute
-                                            title="Fecha Fin"
-                                            text="{pendientes>due_date}"
-                                        />
-                                        
-                                    </ObjectHeader>
-                                </VBox>
+                                    <HBox >
+                                        <ObjectHeader
+                                            title="{pendientes>title}"
+                                            number="{pendientes>priority}"
+                                            visible="{!pendientes>editable}"
+                                            titlePress=".onEdit"
+                                        >
 
+                                                                                    <layoutData>
+                                                <FlexItemData growFactor="9" />
+                                            </layoutData>
+                                            
+                                            <statuses>
+                                                <ObjectStatus
+                                                    text="{pendientes>status}"
+                                                    state="Success"
+                                                />
+                                            </statuses>
+                                            <ObjectAttribute
+                                                title="Descripcion"
+                                                text="{pendientes>description}"
+                                            />
+                                            <ObjectAttribute
+                                                title="Fecha Creación"
+                                                text="{pendientes>date_created}"
+                                            />
+                                            <ObjectAttribute
+                                                title="Fecha Inicio"
+                                                text="{pendientes>date_start}"
+                                            />
+                                            <ObjectAttribute
+                                                title="Fecha Fin"
+                                                text="{pendientes>due_date}"
+                                            />
+                                        </ObjectHeader>
+
+                                        <VBox justifyContent="Center">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+
+                                            <Button 
+                                                text="Completado" 
+                                                press=".onPressCompleted" 
+                                                visible="{= ${pendientes>status} !== 'completed' }"/>
+
+                                        </VBox>
+
+                                    </HBox>
+                                </VBox>
 
                             </cells>
                         </ColumnListItem>
                     </items>
                 </Table>
 
-                <List
+                <!--List
                     items="{
                         path: 'pendientes>/',
                         sorter: {
@@ -168,8 +202,7 @@
                     
                     </ObjectListItem>
 
-                </List>
-
+                </List-->
             </content>
         </Page>
     </Shell>

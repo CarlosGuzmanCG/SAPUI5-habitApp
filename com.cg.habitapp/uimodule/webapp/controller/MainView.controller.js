@@ -17,7 +17,9 @@ sap.ui.define(
                 'description',
                 'date_created',
                 'date_start',
-                'due_date'
+                'due_date',
+                'editable',
+                'status'
             ],
 
             createNewTask: function(){
@@ -66,7 +68,9 @@ sap.ui.define(
 
                 recordToAdd.date_created = year + "-" +  month + "-" + day;
                 //recordToAdd.date_created = new Date(); //agregamos una fecha al controlador
-                recordToAdd.priority = 0;//Nuevo registro
+                recordToAdd.priority = -1;//Nuevo registro
+                recordToAdd.status = 'pending';
+                recordToAdd.editable = true;
 
                 oDatos.push( recordToAdd );
 
@@ -95,12 +99,53 @@ sap.ui.define(
                 debugger
             },
 
-            onPressItem: function(oEvent){
+            /*onPressItem: function(oEvent){
                 console.log('onPressItem');
+            },*/
+
+            onListItemPress: function(oEvent){
+                var oPressedListItemContext = oEvent.getParameter('listItem').getBindingContext('pendientes'); //Contexto de la lista
+                var oModel = oPressedListItemContext.getModel(); //
+                var sPath = oPressedListItemContext.getPath();
+
+                var position = sPath.split('/')[1];
+                var oData = oModel.getData();
+
+                for(var i = 0; i < oData.length;i++){
+                    sPath = "/"+i;
+                    if(i == position) continue;
+                    oModel.setProperty( sPath + '/editable', false );
+                }
+
+                sPath = "/"+ position;
+
+                //Modificamos los datos oModel.setData(path, new value)
+                oModel.setProperty( sPath + '/editable', true );
+
             },
 
-            onPressListItem: function(oEvent){
-                console.log('onPressListItem');
+            onPressSaveTask: function(oEvent){
+                //var oModel = this.getModel('pendientes');
+                //var oData = oModel.getData();
+                var oData = this.getModel('pendientes').getData();
+
+                var oPressedListItemContext = oEvent.getSource().getBindingContext('pendientes'); //Contexto de la lista
+                var oModel = oPressedListItemContext.getModel(); 
+                var sPath = oPressedListItemContext.getPath();
+
+                for(var i = 0; i < oData.length; i++){
+                    var sPath = "/"+i;
+                    oModel.setProperty( sPath + '/editable', false );
+                }
+
+            },
+
+            onPressCompleted: function(oEvent){
+                var oPressedListItemContext = oEvent.getSource().getBindingContext('pendientes'); //Contexto de la lista
+                var oModel = oPressedListItemContext.getModel(); 
+                var sPath = oPressedListItemContext.getPath();
+
+                oModel.setProperty( sPath + '/status', 'completed' );
             }
         });
     });
