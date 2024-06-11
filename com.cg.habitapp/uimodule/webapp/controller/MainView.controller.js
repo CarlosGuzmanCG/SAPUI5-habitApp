@@ -170,7 +170,7 @@ sap.ui.define(
                     oEvent.getSource().setValueState('Error');
                     oEvent.getSource().setValueStateText('Fecha fin no puede ser menor a la fecha inicio');
                     oModel.setProperty( sPath + '/error', true );
-                    debugger
+                    //debugger
                 }else{
                     oEvent.getSource().setValueState('Success');
                     oEvent.getSource().setValueStateText('');
