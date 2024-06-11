@@ -96,7 +96,11 @@ sap.ui.define(
             },
 
             onPressItem: function(oEvent){
-                debugger
+                console.log('onPressItem');
+            },
+
+            onPressListItem: function(oEvent){
+                console.log('onPressListItem');
             }
         });
     });

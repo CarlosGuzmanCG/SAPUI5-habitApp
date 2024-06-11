@@ -22,8 +22,7 @@
                             }
 
                     }"
-                    mode="Delete"
-                    delete=".onDeleteTask"
+                    itemPress=".onPressListItem"
                 >
                     <headerToolbar>
                         <OverflowToolbar>
@@ -42,7 +41,9 @@
                     </columns>
 
                     <items>
-                        <ColumnListItem detailPress="onPressItem">
+                        <ColumnListItem 
+                            press="onPressItem"
+                            type="Active">
                             <cells>
                                 
                                 <VBox>
@@ -158,13 +159,12 @@
                     <ObjectListItem title="{pendientes>title}"
                                         number="{pendientes>priority}"
                                         visible="{!pendientes>editable}"
-                                        press=".onPressItem">
+                                        press="onPressListItem"
+                                        type="Active">
 
                         <firstStatus>
                             <ObjectStatus text="In Stock" state="Success"/>
                         </firstStatus>
-
-                        
                     
                     </ObjectListItem>
 
