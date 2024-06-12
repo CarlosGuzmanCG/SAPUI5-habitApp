@@ -1,6 +1,6 @@
 [
     {
-        "priority": 0,
+        "priority": 45,
         "title": "Prueba 1",
         "description" : "Verificar el orden",
         "date_created": "2024-06-01",
@@ -9,7 +9,7 @@
 
     },
     {
-        "priority": 1,
+        "priority": 80,
         "title": "Prueba 2",
         "description" : "Verificar el orden",
         "date_created": "2024-06-02",
@@ -17,7 +17,7 @@
         "status": "pending"
     },
     {
-        "priority": 2,
+        "priority": 23,
         "title": "Prueba 3",
         "description" : "Verificar el orden",
         "date_created": "2024-06-03",

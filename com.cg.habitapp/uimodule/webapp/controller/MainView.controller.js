@@ -51,6 +51,10 @@ sap.ui.define(
 
                 oModel.loadData('/data/test_task.json');
 
+                if(oModel.loadData == null){
+                    oModel.loadData('/habitApp/com.cg.habitapp/uimodule/webapp/data/test_task.json');
+                }
+
                 this.setModel(oModel,'pendientes'); //Carga a la vista
                 //debbuger;
             },
@@ -176,6 +180,69 @@ sap.ui.define(
                     oEvent.getSource().setValueStateText('');
                     oModel.setProperty( sPath + '/error', false );
                 }
+            },
+
+            updateTaskPriority: function(){
+                var oModel = this.getModel('pendientes');
+                var oData = oModel.getData();
+
+                oData.sort( function compare( a , b ) {
+                    if( a.priority < b.priority ) {
+                        return -1;
+                    }
+                    if( a.priority > b.priority  ) {
+                        return 1;
+                    }
+                    return 0;
+                } );
+
+                for(var x_pendientes = 0; x_pendientes < oData.length; x_pendientes++){
+                    oData[x_pendientes].priority = x_pendientes * 100;
+                }
+
+                oModel.setData(oData, 'pendientes');
+                oModel.refresh(true);
+                
+            },
+
+            onDropReorderTask: function(oEvent){
+                var oDraggedItem = oEvent.getParameter("draggedControl"); //Control que se arrastra
+                var oDroppedItem = oEvent.getParameter("droppedControl"); //Control donde se solto
+                var sDropPosition = oEvent.getParameter("dropPosition"); //Posicion donde se solto
+                
+                var sDraggedPath = oDraggedItem.getBindingContext('pendientes').getPath(); //Path del control que se arrastra
+                //var sDroppedPath = oDroppedItem.getBindingContext('pendientes').getPath(); //Path del control donde se solto
+                //var vPath = parseInt(sDroppedPath.replace('/','')); //Posicion de la tarea que se arrastra
+                var oDroppedData = oDroppedItem.getBindingContext('pendientes').getObject(); //Datos del control donde se solto
+                
+                var oModel = oDraggedItem.getBindingContext('pendientes').getModel(); //Modelo de datos
+
+
+                switch(sDropPosition){
+                    case 'Before':
+                        oModel.setProperty( sDraggedPath + '/priority', oDroppedData.priority - 1 );
+                        //Tomar la prioridad de oDropperdData
+                        //Asigannar la prioridad a la tarea DraggedItem
+                        //Actualizar el resto de tareas con un +1  
+                        
+                        break;
+                    case 'on':
+                        oModel.setProperty( sDraggedPath + '/priority', oDroppedData.priority + 1 );
+                        //Tomar la prioridad de oDropperdData
+                        //Asigannar la prioridad a la tarea DraggedItem
+                        //Actualizar el resto de tareas con un +1  
+                        break;
+                    case 'After':
+                        oModel.setProperty( sDraggedPath + '/priority', oDroppedData.priority + 1);
+                        //Tomar la prioridad de oDropperdData y sumarle 1
+                        //Asigannar la prioridad a la tarea DraggedItem
+                        //Actualizar el resto de tareas con un +1  
+                        break;
+                }
+                //oModel.refresh(true);
+                this.updateTaskPriority();
+
+                //debugger
             }
         });
     });
