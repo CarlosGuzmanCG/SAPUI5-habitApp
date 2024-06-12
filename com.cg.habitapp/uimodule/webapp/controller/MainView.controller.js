@@ -242,7 +242,7 @@ sap.ui.define(
                 //oModel.refresh(true);
                 this.updateTaskPriority();
 
-                debugger
+                //debugger
             }
         });
     });
