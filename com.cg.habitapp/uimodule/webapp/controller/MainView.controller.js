@@ -43,20 +43,43 @@ sap.ui.define(
                 date_start: '',
                 due_date: ''
             },*/
+            onModelChange: function(oEvent){
+                debugger;
+                var oModel = oEvent.getSource(); //Modelo de datos
+                var sJsonData = oModel.getJSON(); //Obtenemos los datos del modelo
+                
+                if(!sJsonData) return; //Si no hay datos no hacemos nada
+
+                //como podemos hacer un almacenamiento con localstorage
+                localStorage.setItem('pendientes', sJsonData); //Guardamos los datos en localstorage
+                localStorage.setItem('pendientes', JSON.stringify(oModel.getData())); //Guardamos los datos en localstorage
+                var sJsonData = localStorage.getItem('pendientes'); //Obtenemos los datos del localstorage
+                var oData = JSON.parse(sJsonData); //Convertimos los datos a un objeto
+
+                localStorage.setItem('pendientes', JSON.stringify(oModel.getData()));  //Guardamos los datos en localstorage
+                var sJsonData = localStorage.getItem('pendientes'); //Obtenemos los datos del localstorage
+                var oData = JSON.parse(sJsonData); //Convertimos los datos a un objeto
+
+                this.getModel('pendientes').setData(oData); //Cargamos los datos en la vista
+            },
 
             onInit: function () {
                 //var oModel = new sap.ui.model.json.JSONModel();
                 var oModel = new JSONModel(); 
                 oModel.setData([]);
 
-                oModel.loadData('/data/test_task.json');
+                //oModel.loadData('/data/test_task.json');
 
-                if(oModel.loadData == null){
-                    oModel.loadData('/habitApp/com.cg.habitapp/uimodule/webapp/data/test_task.json');
+                //cargar el localstorage
+                var sJsonData = localStorage.getItem('pendientes'); // Obtenemos los datos del localstorage
+                var oData = JSON.parse(sJsonData); //Convertimos los datos a un objeto
+
+                if(oData){ //Si hay datos
+                    oModel.setData(oData);
                 }
 
                 this.setModel(oModel,'pendientes'); //Carga a la vista
-                //debbuger;
+                oModel.attachEvent('propertyChange', '',  this.onModelChange, this); //this.onModelChange.bind(this) Modificación  del modelo
             },
 
             onAddTask: function(oEvet){
@@ -95,6 +118,10 @@ sap.ui.define(
                     if(x ==  posicionAEliminar) continue;
                     oNewData.push(oData[x]);
                 }
+
+                //elimina el valor del localstorage
+                localStorage.setItem('pendientes', JSON.stringify(oNewData));
+
 
                 oModel.setData(oNewData);
             },

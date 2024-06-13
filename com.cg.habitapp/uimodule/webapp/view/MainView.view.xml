@@ -93,6 +93,7 @@
                                             <DatePicker
                                                 editable="false"
                                                 value="{pendientes>date_created}"
+                                                valueFormat="yyyy-MM-dd"
                                             />
 
                                             <Text
