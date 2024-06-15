@@ -30,7 +30,7 @@
                     <headerToolbar>
                         <OverflowToolbar>
                             <Button
-                                text="Agregar"
+                                text="{i18n>BtAddTask}"
                                 icon="sap-icon://add-activity"
                                 type="Emphasized"
                                 press=".onAddTask"
@@ -39,7 +39,7 @@
                     </headerToolbar>
                     <columns>
                         <Column hAlign="Center">
-                            <Title text="Pendientes" />
+                            <Title text="{i18n>pendings}" />
                         </Column>
                     </columns>
 
@@ -69,13 +69,13 @@
                                                 <FlexItemData growFactor="3" />
                                             </layoutData>
                                             <VBox>
-                                                <Text text="Titulo" />
+                                                <Text text="{i18n>fieldTTitle}" />
                                                 <Input
                                                     value="{pendientes>title}"
                                                 />
                                             </VBox>
                                             <VBox>
-                                                <Text text="Descripción" />
+                                                <Text text="{i18n>fieldTDescription}" />
                                                 <TextArea
                                                     value="{pendientes>description}"
                                                     rows="3"
@@ -88,7 +88,7 @@
                                                 <FlexItemData growFactor="1" />
                                             </layoutData>
 
-                                            <Text text="Creado el" />
+                                            <Text text="{i18n>fieldCreationDate}" />
                                             <!--DatePicker id="date_created" editable="false" value="{pendientes>date_created}"/-->
                                             <DatePicker
                                                 editable="false"
@@ -97,7 +97,7 @@
                                             />
 
                                             <Text
-                                                text="Fecha inicio planeada"
+                                                text="{i18n>fieldExFieldStartDate}"
                                             />
                                             <DatePicker
                                                 editable="true"
@@ -108,7 +108,7 @@
                                                 valueFormat="yyyy-MM-dd"
                                             />
 
-                                            <Text text="Fecha fin" />
+                                            <Text text="{i18n>FieldEndDate}" />
                                             <DatePicker
                                                 editable="true"
                                                 value="{
@@ -125,7 +125,7 @@
                                                 <FlexItemData growFactor="1" />
                                             </layoutData>
                                             <Button
-                                                text="Guardar"
+                                                text="{i18n>BtSave}"
                                                 press=".onPressSaveTask"
                                                 enabled="{= ! ${pendientes>error} }"
                                             />
@@ -150,19 +150,19 @@
                                                 />
                                             </statuses>
                                             <ObjectAttribute
-                                                title="Descripcion"
+                                                title="{i18n>fieldTDescription}"
                                                 text="{pendientes>description}"
                                             />
                                             <ObjectAttribute
-                                                title="Fecha Creación"
+                                                title="{i18n>fieldCreationDate}"
                                                 text="{pendientes>date_created}"
                                             />
                                             <ObjectAttribute
-                                                title="Fecha Inicio"
+                                                title="{i18n>fieldExFieldStartDate}"
                                                 text="{pendientes>date_start}"
                                             />
                                             <ObjectAttribute
-                                                title="Fecha Fin"
+                                                title="{i18n>FieldEndDate}"
                                                 text="{pendientes>due_date}"
                                             />
                                         </ObjectHeader>
@@ -173,7 +173,7 @@
                                             </layoutData>
 
                                             <Button
-                                                text="Completado"
+                                                text="{i18n>BtFinished}"
                                                 press=".onPressCompleted"
                                                 visible="{= ${pendientes>status} !== 'completed' }"
                                             />
