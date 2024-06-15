@@ -46,19 +46,21 @@ sap.ui.define(
             onModelChange: function(oEvent){
                 //debugger;
                 var reason = oEvent.getParameter('reason'); //Razón del cambio
-                var oModel;
 
                 switch(reason){ //Switch para saber la razón del cambio
                     case 'change': //Se lanza desde un objeto Binding
-                        var oModel = oEvent.getSource().getModel(); //Modelo de datos
+                         var oModel = oEvent.getSource().getModel(); //Modelo de datos
                         break;
                     case 'propertyChange': //Se lanza desde un modelo
+                         var oModel = oEvent.getSource(); //Modelo de datos
+                        break;
+                    case 'binding':
                         var oModel = oEvent.getSource(); //Modelo de datos
                         break;
-
                 }
-                debugger;
+                //debugger;
                 //var oModel = oEvent.getSource(); //Modelo de datos
+            
                 var sJsonData = oModel.getJSON(); //Obtenemos los datos del modelo
                 
                 if(!sJsonData) return; //Si no hay datos no hacemos nada
@@ -80,7 +82,6 @@ sap.ui.define(
                 }else{
                     oModel.loadData('/data/test_task.json'); //Cargamos los datos del archivo json
                 }
-
 
                 this.setModel(oModel,'pendientes'); //Carga a la vista
                 oModel.attachEvent('propertyChange', '',  this.onModelChange, this); //this.onModelChange.bind(this) Modificación  del modelo
@@ -115,6 +116,8 @@ sap.ui.define(
                 recordToAdd.status = 'pending';
                 recordToAdd.editable = true;
 
+                this.updateTaskPriority();
+
                 oDatos.push( recordToAdd );
 
                 oModel.setData(oDatos);
@@ -139,7 +142,7 @@ sap.ui.define(
             },
 
             onEdit: function(oEvent){
-                debugger
+                //debugger
             },
 
             /*onPressItem: function(oEvent){
@@ -148,11 +151,13 @@ sap.ui.define(
 
             onListItemPress: function(oEvent){
                 var oPressedListItemContext = oEvent.getParameter('listItem').getBindingContext('pendientes'); //Contexto de la lista
-                var oModel = oPressedListItemContext.getModel(); //
-                var sPath = oPressedListItemContext.getPath();
+                var oModel = oPressedListItemContext.getModel(); //Modelo de datos
+                var sPath = oPressedListItemContext.getPath(); //Path de la tarea
 
-                var position = sPath.split('/')[1];
-                var oData = oModel.getData();
+                //debugger;
+
+                var position = sPath.split('/')[1];//Posición de la tarea
+                var oData = oModel.getData(); //Obtenemos los datos del modelo
 
                 for(var i = 0; i < oData.length;i++){
                     sPath = "/"+i;
