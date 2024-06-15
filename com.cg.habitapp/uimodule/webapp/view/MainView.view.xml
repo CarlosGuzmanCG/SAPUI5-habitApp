@@ -194,15 +194,12 @@
                                                 <FlexItemData growFactor="1" />
                                             </layoutData>
 
-
                                             <Button
                                                 text="{i18n>BtFinished}"
                                                 press=".onPressCompleted"
                                                 type="Emphasized"
                                                 visible="{= ${pendientes>status} !== 'completed' }"
                                             />
-
-                                            
 
                                         </VBox>
                                     </HBox>
