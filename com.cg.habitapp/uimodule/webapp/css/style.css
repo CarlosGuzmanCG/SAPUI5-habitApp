@@ -1,1 +1,39 @@
 /* Enter your custom styles here */
+table {
+    width: 100%; /* Ajusta la tabla al ancho de su contenedor */
+    border-collapse: collapse; /* Elimina el espacio entre los bordes de las celdas */
+    table-layout: fixed; /* Ayuda a prevenir que las celdas cambien de ancho */
+}
+
+th, td {
+    border: 2px solid #e7e1e1; /* Añade un borde ligero a las celdas */
+}
+
+.customBoldText{
+    font-weight: bold; /* Texto en negrita */
+    font-size: 15px; /* Tamaño de fuente */
+}
+.myObjectHeader{
+    background-color: #f9f9f9; /* Color de fondo más claro */
+    border: 1px solid #ccc; /* Borde más suave */
+    padding: 12px; /* Más espaciado interno para una apariencia más amplia */
+    border-radius: 80px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0,0,0,2); /* Sombra para profundidad */
+    margin-top: 26px; /* Margen superior para separar de otros elementos */
+    margin-bottom: 26px; /* Margen inferior para separar de otros elementos */
+    cursor: move; /* Cambia el cursor al pasar el mouse */
+}
+
+.myObjectStatus{
+    font-weight: bold; /* Texto en negrita */
+    font-size: 15px; /* Tamaño de fuente */
+}
+
+.myObjectAttribute{
+    font-weight: bold; /* Texto en negrita */
+    font-size: 15px; /* Tamaño de fuente */
+}
+
+.myObjectHeader:hover {
+    filter: blur(.3px); /* Efecto borroso al pasar el mouse */
+}
