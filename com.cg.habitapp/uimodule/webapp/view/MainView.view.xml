@@ -69,13 +69,19 @@
                                                 <FlexItemData growFactor="3" />
                                             </layoutData>
                                             <VBox>
-                                                <Text text="{i18n>fieldTTitle}" />
+                                                <Text
+                                                    text="{i18n>fieldTTitle}"
+                                                    class="customBoldText"
+                                                />
                                                 <Input
                                                     value="{pendientes>title}"
                                                 />
                                             </VBox>
                                             <VBox>
-                                                <Text text="{i18n>fieldTDescription}" />
+                                                <Text
+                                                    text="{i18n>fieldTDescription}"
+                                                    class="customBoldText"
+                                                />
                                                 <TextArea
                                                     value="{pendientes>description}"
                                                     rows="3"
@@ -88,7 +94,10 @@
                                                 <FlexItemData growFactor="1" />
                                             </layoutData>
 
-                                            <Text text="{i18n>fieldCreationDate}" />
+                                            <Text
+                                                text="{i18n>fieldCreationDate}"
+                                                class="customBoldText"
+                                            />
                                             <!--DatePicker id="date_created" editable="false" value="{pendientes>date_created}"/-->
                                             <DatePicker
                                                 editable="false"
@@ -98,6 +107,7 @@
 
                                             <Text
                                                 text="{i18n>fieldExFieldStartDate}"
+                                                class="customBoldText"
                                             />
                                             <DatePicker
                                                 editable="true"
@@ -108,7 +118,10 @@
                                                 valueFormat="yyyy-MM-dd"
                                             />
 
-                                            <Text text="{i18n>FieldEndDate}" />
+                                            <Text
+                                                text="{i18n>FieldEndDate}"
+                                                class="customBoldText"
+                                            />
                                             <DatePicker
                                                 editable="true"
                                                 value="{
@@ -127,6 +140,7 @@
                                             <Button
                                                 text="{i18n>BtSave}"
                                                 press=".onPressSaveTask"
+                                                type="Emphasized"
                                                 enabled="{= ! ${pendientes>error} }"
                                             />
                                         </VBox>
@@ -135,8 +149,9 @@
                                     <HBox>
                                         <ObjectHeader
                                             title="{pendientes>title}"
+                                            class="myObjectHeader"
                                             number="{pendientes>priority}"
-                                            visible="{!pendientes>editable}"
+                                            visible="{= ! ${pendientes>editable} }"
                                             titlePress=".onEdit"
                                         >
                                             <layoutData>
@@ -147,36 +162,48 @@
                                                 <ObjectStatus
                                                     text="{pendientes>status}"
                                                     state="Success"
+                                                    class="myObjectStatus"
                                                 />
                                             </statuses>
+
                                             <ObjectAttribute
                                                 title="{i18n>fieldTDescription}"
                                                 text="{pendientes>description}"
+                                                class="myObjectAttribute"
                                             />
                                             <ObjectAttribute
                                                 title="{i18n>fieldCreationDate}"
                                                 text="{pendientes>date_created}"
+                                                class="myObjectAttribute"
                                             />
                                             <ObjectAttribute
                                                 title="{i18n>fieldExFieldStartDate}"
                                                 text="{pendientes>date_start}"
+                                                class="myObjectAttribute"
                                             />
                                             <ObjectAttribute
                                                 title="{i18n>FieldEndDate}"
                                                 text="{pendientes>due_date}"
+                                                class="myObjectAttribute"
                                             />
                                         </ObjectHeader>
 
                                         <VBox justifyContent="Center">
+                                            
                                             <layoutData>
                                                 <FlexItemData growFactor="1" />
                                             </layoutData>
 
+
                                             <Button
                                                 text="{i18n>BtFinished}"
                                                 press=".onPressCompleted"
+                                                type="Emphasized"
                                                 visible="{= ${pendientes>status} !== 'completed' }"
                                             />
+
+                                            
+
                                         </VBox>
                                     </HBox>
                                 </VBox>
