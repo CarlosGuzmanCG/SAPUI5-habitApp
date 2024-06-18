@@ -80,7 +80,7 @@ sap.ui.define(
                 if(localStorageData){ //Si hay datos en el local storage
                     oModel.setJSON(localStorageData); //Cargamos los datos del local storage
                 }else{
-                    oModel.loadData('/data/test_task.json'); //Cargamos los datos del archivo json
+                    oModel.loadData(''); //Cargamos los datos del archivo json /data/test_task.json
                 }
 
                 this.setModel(oModel,'pendientes'); //Carga a la vista
